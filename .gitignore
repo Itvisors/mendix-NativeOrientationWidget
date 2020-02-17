@@ -1,4 +1,14 @@
+test/deployment/
+test/.classpath
+test/.project
+test/theme/.sass-cache/
 dist/
 node_modules/
 *.log
-.env
+*.launch
+*.tmp
+*.lock
+*.bak
+.idea/
+*DS_Store*
+.npmrc
