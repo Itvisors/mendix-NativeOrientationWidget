@@ -1,16 +1,20 @@
 /**
  * This file was generated from NativeOrientationWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
-import { ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 
-interface CommonProps<Style> {
+export interface NativeOrientationWidgetProps<Style> {
     name: string;
     style: Style[];
-}
-
-export interface NativeOrientationWidgetProps<Style> extends CommonProps<Style> {
     contentPortrait?: ReactNode;
     contentLandscape?: ReactNode;
+}
+
+export interface NativeOrientationWidgetPreviewProps {
+    class: string;
+    style: string;
+    contentPortrait: { widgetCount: number; renderer: ComponentType };
+    contentLandscape: { widgetCount: number; renderer: ComponentType };
 }
