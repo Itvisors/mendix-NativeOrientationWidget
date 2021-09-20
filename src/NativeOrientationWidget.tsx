@@ -35,7 +35,7 @@ export class NativeOrientationWidget extends Component<
         });
     };
 
-    componentWillMount(): void {
+    componentDidMount(): void {
         Dimensions.addEventListener("change", this.handler);
     }
 
@@ -51,10 +51,10 @@ export class NativeOrientationWidget extends Component<
 
     private renderContent = (): ReactNode => {
         if (this.state.windowHeight > this.state.windowWidth) {
-            console.info("NativeOrientationWidget: render portrait");
+            console.debug("NativeOrientationWidget: render portrait");
             return this.props.contentPortrait;
         } else {
-            console.info("NativeOrientationWidget: render landscape");
+            console.debug("NativeOrientationWidget: render landscape");
             return this.props.contentLandscape;
         }
     };

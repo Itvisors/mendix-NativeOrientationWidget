@@ -1,7 +1,7 @@
 {
   "name": "nativeorientationwidget",
   "widgetName": "NativeOrientationWidget",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Native orientation widget",
   "copyright": "ITvisors 2019",
   "author": "Marcel Groeneweg",
