@@ -15,6 +15,6 @@ export interface NativeOrientationWidgetProps<Style> {
 export interface NativeOrientationWidgetPreviewProps {
     class: string;
     style: string;
-    contentPortrait: { widgetCount: number; renderer: ComponentType };
-    contentLandscape: { widgetCount: number; renderer: ComponentType };
+    contentPortrait: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    contentLandscape: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }
