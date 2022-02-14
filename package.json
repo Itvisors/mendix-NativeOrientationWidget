@@ -1,7 +1,7 @@
 {
   "name": "nativeorientationwidget",
   "widgetName": "NativeOrientationWidget",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Native orientation widget",
   "copyright": "ITvisors 2019",
   "author": "Marcel Groeneweg",
@@ -23,7 +23,7 @@
     "url": "https://github.com/Marcel Groeneweg/nativeorientationwidget/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^9.5.4",
+    "@mendix/pluggable-widgets-tools": "^9.10.0",
     "@types/big.js": "^4.0.5",
     "@types/react": "~16.9.0",
     "@types/react-native": "~0.61.23"
