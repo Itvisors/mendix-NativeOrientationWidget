@@ -9,6 +9,6 @@ For example, in portrait, render your dashboard by placing four buttons in two l
 ## Usage
 Place content in the two content area's, separate for portrait and landscape. Be sure to use snippets to avoid duplicating your page content.
 
-## Known issues
-None
+The maximum size class can be used if your content is scrollable, like a listview. Without the maximum size option, the listview may not scroll properly
+
 

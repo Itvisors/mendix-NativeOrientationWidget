@@ -16,6 +16,10 @@
                 <caption>Content landscape</caption>
                 <description>Widgets to show in landscape orientation</description>
             </property>
+            <property key="useMaximumSize" type="boolean" defaultValue="false">
+                <caption>Use maximum size</caption>
+                <description>Use maximum size class</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
