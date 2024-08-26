@@ -17,7 +17,9 @@ When using the widget in an input form, place the widget inside the dataview. Us
 
 You can check the test app in the GitHub repo.
 
-The maximum size class can be used if your content is scrollable, like a listview or a scroll container. Without the maximum size option, no content could be shown at all or scrolling may not work properly.
+The maximum size class can be used if your content is scrollable, like a scroll container. Without the maximum size option, no content could be shown at all or scrolling may not work properly.
+
+Listviews don't work well inside this widget. Use this widget inside the listview to show listview item content depending on device rotation rather than separate listviews for each orientation.
 
 ## Styling
 
