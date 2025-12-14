@@ -6,27 +6,25 @@ package nanoflowcommons.proxies;
 
 public enum Enum_DistanceUnit
 {
-	KILOMETER(new java.lang.String[][] { new java.lang.String[] { "en_US", "KILOMETER" } }),
-	STATUTE_MILE(new java.lang.String[][] { new java.lang.String[] { "en_US", "STATUTE_MILE" } }),
-	NAUTICAL_MILE(new java.lang.String[][] { new java.lang.String[] { "en_US", "NAUTICAL_MILE" } });
+	KILOMETER("8f4fc200-b3e5-487c-a008-8c2dd3087d13"),
+	STATUTE_MILE("ceea8a4e-9317-4a8d-b3cd-fe808c667cf2"),
+	NAUTICAL_MILE("dec2d911-0fd5-4d63-a2da-ac9bba5549a5");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private Enum_DistanceUnit(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private Enum_DistanceUnit(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }

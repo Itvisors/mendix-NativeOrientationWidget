@@ -6,26 +6,24 @@ package testnativeorientationwidget.proxies;
 
 public enum ENUM_Orientation
 {
-	portrait(new java.lang.String[][] { new java.lang.String[] { "en_US", "Portrait" } }),
-	landscape(new java.lang.String[][] { new java.lang.String[] { "en_US", "Landscape" } });
+	portrait("ca297467-552d-47f8-b2ff-29b2d72fe076"),
+	landscape("10e5e0ff-ff5a-4650-afd4-6b619f2ff94c");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private ENUM_Orientation(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private ENUM_Orientation(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }
