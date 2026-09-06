@@ -52,7 +52,7 @@ export async function GetCurrentLocation(timeout, maximumAge, highAccuracy) {
     }
     return new Promise((resolve, reject) => {
         const options = getOptions();
-        geolocationModule === null || geolocationModule === void 0 ? void 0 : geolocationModule.getCurrentPosition(onSuccess, onError, options);
+        geolocationModule === null || geolocationModule === undefined ? undefined : geolocationModule.getCurrentPosition(onSuccess, onError, options);
         function onSuccess(position) {
             mx.data.create({
                 entity: "NanoflowCommons.Geolocation",
@@ -72,7 +72,7 @@ export async function GetCurrentLocation(timeout, maximumAge, highAccuracy) {
             // If the timeout is 0 or undefined (empty), it causes a crash on iOS.
             // If the timeout is undefined (empty); we set timeout to 30 sec (default timeout)
             // If the timeout is 0; we set timeout to 1 hour (no timeout)
-            if ((reactNativeModule === null || reactNativeModule === void 0 ? void 0 : reactNativeModule.Platform.OS) === "ios") {
+            if ((reactNativeModule === null || reactNativeModule === undefined ? undefined : reactNativeModule.Platform.OS) === "ios") {
                 if (timeoutNumber === undefined) {
                     timeoutNumber = 30000;
                 }

@@ -1,5 +1,5 @@
 import { View, useWindowDimensions } from "react-native";
-import { createElement, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { defaultWidgetStyle } from "./ui/styles";
 import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
@@ -18,42 +18,40 @@ export function NativeOrientationWidget(props) {
     const contentStyle = useMaximumSize ? styles.contentMaximumSize : styles.content;
 
     const { currentOrientationAttr, orientationChangeAction } = props;
-    useEffect(() => {
-        setCurrentOrientation(c => {
+
+    // Adjusting state during render: detect orientation change
+    if (newOrientation !== currentOrientation) {
+        if (currentOrientationAttr && currentOrientationAttr.status !== "available") {
+            // console.info("NativeOrientationWidget: orientation attribute is not yet available");
+            if (currentOrientation !== undefined) {
+                setCurrentOrientation(undefined);
+            }
+        } else {
             // console.info(
-            //     "NativeOrientationWidget: setCurrentOrientation state updater, current: [" +
-            //         c +
+            //     "NativeOrientationWidget: setCurrentOrientation, current: [" +
+            //         currentOrientation +
             //         "], new: [" +
             //         newOrientation +
             //         "]"
             // );
-            if (!c || newOrientation !== c) {
-                if (currentOrientationAttr && currentOrientationAttr.status !== "available") {
-                    // console.info("NativeOrientationWidget: orientation attribute is not yet available");
-                    return undefined;
-                }
-                if (currentOrientationAttr && currentOrientationAttr.status === "available") {
-                    if (!currentOrientationAttr.readonly) {
-                        // console.info(
-                        //     "NativeOrientationWidget: setCurrentOrientation attribute value to [" + newOrientation + "]"
-                        // );
-                        currentOrientationAttr.setValue(newOrientation);
-                    } else {
-                        console.warn("NativeOrientationWidget: orientation attribute is readonly");
-                    }
-                }
-                if (
-                    orientationChangeAction &&
-                    orientationChangeAction.canExecute &&
-                    !orientationChangeAction.isExecuting
-                ) {
-                    // console.info("NativeOrientationWidget: call orientation change action");
-                    orientationChangeAction.execute();
+            setCurrentOrientation(newOrientation);
+
+            if (currentOrientationAttr && currentOrientationAttr.status === "available") {
+                if (!currentOrientationAttr.readonly) {
+                    // console.info(
+                    //     "NativeOrientationWidget: setCurrentOrientation attribute value to [" + newOrientation + "]"
+                    // );
+                    currentOrientationAttr.setValue(newOrientation);
+                } else {
+                    console.warn("NativeOrientationWidget: orientation attribute is readonly");
                 }
             }
-            return newOrientation;
-        });
-    }, [currentOrientationAttr, newOrientation, orientationChangeAction]);
+            if (orientationChangeAction && orientationChangeAction.canExecute && !orientationChangeAction.isExecuting) {
+                // console.info("NativeOrientationWidget: call orientation change action");
+                orientationChangeAction.execute();
+            }
+        }
+    }
 
     const { contentPortrait, contentLandscape } = props;
     const renderContent = useMemo(() => {

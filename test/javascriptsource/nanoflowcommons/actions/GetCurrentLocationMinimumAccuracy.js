@@ -59,11 +59,7 @@ export async function GetCurrentLocationMinimumAccuracy(timeout, maximumAge, hig
         // This action is only required while running in PWA or hybrid.
         if (navigator && (!navigator.product || navigator.product !== "ReactNative")) {
             // This ensures the browser will not ignore the maximumAge https://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt/31916631#31916631
-            geolocationModule.getCurrentPosition(
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            () => { }, 
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            () => { }, {});
+            geolocationModule.getCurrentPosition(() => { }, () => { }, {});
         }
         const timeoutId = setTimeout(onTimeout, Number(timeout));
         const watchId = geolocationModule.watchPosition(onSuccess, onError, options);
@@ -76,7 +72,7 @@ export async function GetCurrentLocationMinimumAccuracy(timeout, maximumAge, hig
             });
         }
         function onTimeout() {
-            geolocationModule === null || geolocationModule === void 0 ? void 0 : geolocationModule.clearWatch(watchId);
+            geolocationModule === null || geolocationModule === undefined ? undefined : geolocationModule.clearWatch(watchId);
             if (lastAccruedPosition) {
                 createGeolocationObject(lastAccruedPosition);
             }
@@ -87,7 +83,7 @@ export async function GetCurrentLocationMinimumAccuracy(timeout, maximumAge, hig
         function onSuccess(position) {
             if (!minimumAccuracy || Number(minimumAccuracy) >= position.coords.accuracy) {
                 clearTimeout(timeoutId);
-                geolocationModule === null || geolocationModule === void 0 ? void 0 : geolocationModule.clearWatch(watchId);
+                geolocationModule === null || geolocationModule === undefined ? undefined : geolocationModule.clearWatch(watchId);
                 createGeolocationObject(position);
             }
             else {
@@ -105,7 +101,7 @@ export async function GetCurrentLocationMinimumAccuracy(timeout, maximumAge, hig
             // If the timeout is 0 or undefined (empty), it causes a crash on iOS.
             // If the timeout is undefined (empty); we set timeout to 30 sec (default timeout)
             // If the timeout is 0; we set timeout to 1 hour (no timeout)
-            if ((reactNativeModule === null || reactNativeModule === void 0 ? void 0 : reactNativeModule.Platform.OS) === "ios") {
+            if ((reactNativeModule === null || reactNativeModule === undefined ? undefined : reactNativeModule.Platform.OS) === "ios") {
                 if (timeoutNumber === undefined) {
                     timeoutNumber = 30000;
                 }
